@@ -53,15 +53,13 @@ graph3 = frame.add_subplot(325)
 graph4 = frame.add_subplot(326)
 
 graph1.axis([0,1,0,1])
-graph1.scatter(x, y)
+graph1.scatter(x, y, color='green')
 line, = graph1.plot(t, f(t))
 
 error = cost()
 
 while error > 0.02 :
-    #graph2.scatter(a, cost())
     graph2.plot(a, cost(), 'ro')
-    #graph3.scatter(b, cost())
     graph3.plot(b, cost(), 'ro')
     graph4.scatter(a, b, cost())
     a = a - (w(a) * learning_rate_a)
