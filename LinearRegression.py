@@ -1,4 +1,6 @@
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import cm
 import numpy as np
 
 # y = ax + b
@@ -52,17 +54,19 @@ graph4 = frame.add_subplot(326)
 
 graph1.axis([0,1,0,1])
 graph1.scatter(x, y)
-line = graph1.plot(t, f(t))
+line, = graph1.plot(t, f(t))
 
 error = cost()
 
 while error > 0.02 :
     graph2.scatter(a, cost())
     graph3.scatter(b, cost())
+    graph4.scatter(a, b, cost())
     a = a - (w(a) * learning_rate_a)
     b = b - (bias(b) * learning_rate_b)
-    graph1.plot(t, f(t))
+    line.set_ydata(f(t))
     error = cost()
+    
     print(error)
     plt.pause(0.05)
 
