@@ -9,15 +9,15 @@ a = np.random.randint(10)
 b = np.random.uniform(0, 1)
 
 # init learning_rate
-learning_rate_a = 0.05
-learning_rate_b = 0.01
+learning_rate_a = 0.08
+learning_rate_b = 0.1
 
 # dataset
 x = []
 y = []
 for repeat in range(20):
-    data_x = np.random.uniform(0.3, 0.7)
-    data_y = np.random.uniform(0.3, 0.7)
+    data_x = np.random.uniform(0.4, 0.6)
+    data_y = np.random.uniform(0.4, 0.6)
     x.append(data_x)
     y.append(data_y)
 
@@ -34,16 +34,18 @@ def cost() :
     return sum / len(x)
 
 def w(a) :
-    sum = 0
-    for repeat in range(len(x)):
-        sum += 2 * x[repeat]**2 * a + 2 * (b - y[repeat]) * x[repeat]
-    return sum / len(x)
+    #sum = 0
+    #for repeat in range(len(x)):
+    #    sum += 2 * x[repeat]**2 * a + 2 * (b - y[repeat]) * x[repeat]
+    #return sum / len(x)
+    return 2 * x[repeat]**2 * a + 2 * (b - y[repeat]) * x[repeat]
 
 def bias(b) :
-    sum = 0
-    for repeat in range(len(x)):
-        sum += 2 * a * x[repeat] + 2 * b - 2 * y[repeat]
-    return sum / len(x)
+    #sum = 0
+    #for repeat in range(len(x)):
+    #    sum += 2 * a * x[repeat] + 2 * b - 2 * y[repeat]
+    #return sum / len(x)
+    return 2 * a * x[repeat] + 2 * b - 2 * y[repeat]
 
 frame = plt.figure()
 
@@ -59,8 +61,8 @@ line, = graph1.plot(t, f(t))
 error = cost()
 
 while error > 0.02 :
-    graph2.plot(a, cost(), 'ro')
-    graph3.plot(b, cost(), 'ro')
+    graph2.scatter(a, cost())
+    graph3.scatter(b, cost())
     graph4.scatter(a, b, cost())
     a = a - (w(a) * learning_rate_a)
     b = b - (bias(b) * learning_rate_b)
